@@ -327,14 +327,14 @@ INSERT INTO topSongs (songCode, year, rating) VALUES
 ('S24',2022,1),
 ('S25',2012,4);
 
-/*question 1 */
+/*Query 1*/
 SELECT mg.groupName, c.cdTitle, c.numberSold
 FROM cd c
 JOIN musicalGroup mg ON c.groupCode = mg.groupCode
 WHERE c.numberSold > 200000
 ORDER BY mg.groupName ASC, c.numberSold DESC;
 
-/*question 2*/
+/*Query 2*/
 SELECT a.firstName, a.lastName, COUNT (tps.songCode) AS countOfTopSongs
 FROM artist a 
 JOIN writtenBY wb ON a.artistID = wb.artistID
@@ -344,7 +344,7 @@ GROUP BY a.firstName, a.lastName
 HAVING COUNT (tps.songCode) > 0 
 ORDER BY countOfTopSongs DESC; 
 
-/*question 3*/
+/*Query 3*/
 SELECT mg.groupName, 
        MAX(c.numberSold) AS maxSold, 
        MIN(c.numberSold) AS minSold, 
@@ -355,7 +355,7 @@ WHERE c.year > 2000
 GROUP BY mg.groupName
 ORDER BY avgSold DESC;
 
-/*question 4 */
+/*Query 4 */
 SELECT s.songTitle, COUNT(co.cdCode) AS NumOfCDSTheSongIsIn
 FROM composeOf co
 JOIN song s ON co.songCode = s.songCode
@@ -363,7 +363,7 @@ GROUP BY s.songTitle
 HAVING COUNT (co.cdCode) > 2
 ORDER BY NumOfCDSTheSongIsIn DESC; 
 
-/*question 5*/
+/*Query 5*/
 SELECT mg.groupName, mg.groupCode
 FROM musicalGroup mg
 WHERE NOT EXISTS (
@@ -376,7 +376,7 @@ WHERE NOT EXISTS (
 )
 ORDER BY mg.groupName ASC;
 
-/*question 6*/
+/*Query 6*/
 SELECT a.artistID, a.firstName, a.lastName, COUNT (DISTINCT tps.songCode) AS countOfTopSongs,
 	COUNT (DISTINCT c.cdCode) AS countHighSellingCDs
 FROM artist a
